@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
@@ -16,6 +17,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // Checking backend connection
+  useEffect(() => {
+    fetch("http://localhost:5000/api")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <>
       <Navbar />
