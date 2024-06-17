@@ -1,20 +1,12 @@
 import { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
-import Navbar from "./components/AppNavbar";
+import HostLayout from "./components/HostLayout";
+
+
 import "./App.css";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-]);
 
 function App() {
   // Checking backend connection
@@ -25,10 +17,14 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Navbar />
-      <RouterProvider router={router} />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HostLayout />}>
+          <Route index element={<Home />} />
+          <Route path="signup" element={<Signup /> } />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
