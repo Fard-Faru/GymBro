@@ -15,7 +15,7 @@ app.get("/api", (req, res) => {
     res.json({"test": [1, 2, 3]});
 })
 
-// Start the server
+// Start the server, test
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
