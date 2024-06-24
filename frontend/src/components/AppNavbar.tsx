@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,13 +7,17 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
+  Link as UILink,
   Button,
 } from "@nextui-org/react";
-// import {AcmeLogo} from "./AcmeLogo.jsx";
+
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 export default function AppNavbar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     "Profile",
@@ -36,34 +40,39 @@ export default function AppNavbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">ACME</p>
+          <FontAwesomeIcon icon={faDumbbell} style={{marginRight: "5px"}}/>
+          <p className="font-bold text-inherit">GymBro</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <UILink as={Link} color="foreground" href="#">
             Features
-          </Link>
+          </UILink>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <UILink as={Link} href="#" aria-current="page">
             Customers
-          </Link>
+          </UILink>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <UILink as={Link} color="foreground" href="#">
             Integrations
-          </Link>
+          </UILink>
+        </NavbarItem>
+        <NavbarItem>
+          <UILink as={Link} color="foreground" to="weightTracker">
+            Weight Tracker
+          </UILink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <UILink href="#">Login</UILink>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={UILink} color="primary" href="#" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
@@ -71,7 +80,7 @@ export default function AppNavbar() {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
+            <UILink
               color={
                 index === 2
                   ? "primary"
@@ -84,7 +93,7 @@ export default function AppNavbar() {
               size="lg"
             >
               {item}
-            </Link>
+            </UILink>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
