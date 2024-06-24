@@ -4,7 +4,6 @@ import Home from "./views/Home";
 import Signup from "./views/Signup";
 import HostLayout from "./components/HostLayout";
 
-
 import "./App.css";
 
 
