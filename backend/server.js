@@ -1,19 +1,15 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors'); 
-const app = express();
-const PORT = process.env.PORT || 5000;
+const appRoutes = require('./app/routes/appRoute')
+const PORT = 5000;
 
-// Load environment variables from .env file
-// require('dotenv').config();
+const app = express();
 
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/api", (req, res) => {
-    res.json({"test": [1, 2, 3]});
-})
+app.use('/api', appRoutes);
 
 // Start the server
 app.listen(PORT, () => {

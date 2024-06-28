@@ -7,9 +7,9 @@ import HostLayout from "./components/HostLayout";
 import "./App.css";
 
 function App() {
-  // Checking backend connection
+  // Checking backend connection with sql server
   useEffect(() => {
-    fetch("http://localhost:5000/api")
+    fetch("http://localhost:5000/api/data")
       .then((res) => res.json())
       .then((data) => console.log(data));
   }, []);
