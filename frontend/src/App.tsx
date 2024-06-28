@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
-// import Navbar from "./components/AppNavbar";
-// import Footer from "./components/AppFooter";
 import HostLayout from "./components/HostLayout";
 
 import "./App.css";
