@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
+import Login from "./views/Login";
 import HostLayout from "./components/HostLayout";
 
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HostLayout />}>
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
