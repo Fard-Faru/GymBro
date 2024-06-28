@@ -9,14 +9,13 @@ import WeightTrackerAdd from "./views/WeightTracker/WeightTrackerAdd.tsx";
 
 import "./App.css";
 
-
 function App() {
-  // Checking backend connection
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/api")
-  //     .then(res => res.json())
-  //     .then(data => console.log(data));
-  // }, []);
+  // Checking backend connection with sql server
+  useEffect(() => {
+    fetch("http://localhost:5000/api/data")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
 
   return (
     <BrowserRouter>
