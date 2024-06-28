@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
 import Navbar from "./components/AppNavbar";
+import Footer from "./components/AppFooter";
 import "./App.css";
 
 const router = createBrowserRouter([
@@ -27,7 +28,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <RouterProvider router={router} />
+      <div className="page_content" style={{ margin: "10px", padding: "10px" }}>
+        <RouterProvider router={router} />
+      </div>
+      <Footer />
     </>
   );
 }

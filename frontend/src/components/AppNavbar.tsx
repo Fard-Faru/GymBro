@@ -10,7 +10,6 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-// import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -37,33 +36,38 @@ export default function AppNavbar() {
         />
         <NavbarBrand>
           {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">GymBro</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
+          <Link color="foreground" href="/">
+            Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+          <Link href="features" aria-current="page">
+            Features
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="about">
+            About
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="contact">
+            Contact
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="signup" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
