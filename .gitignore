@@ -35,5 +35,5 @@ Thumbs.db
 *.swp
 
 # Build directory
-dist/
-build/
+# dist/
+# build/
