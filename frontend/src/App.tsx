@@ -4,7 +4,7 @@ import Home from "./views/Home";
 import Signup from "./views/Signup";
 import Login from "./views/Login";
 import HostLayout from "./components/HostLayout";
-
+import Dashboard from "./views/Dashboard";
 import "./App.css";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>
