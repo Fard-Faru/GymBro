@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -10,13 +10,12 @@ import {
   Link as UILink,
   Button,
 } from "@nextui-org/react";
-
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
-export default function AppNavbar() {
+
+const AppNavbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -32,6 +31,7 @@ export default function AppNavbar() {
     "Log Out",
   ];
 
+
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
@@ -40,31 +40,51 @@ export default function AppNavbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <FontAwesomeIcon icon={faDumbbell} style={{marginRight: "5px"}}/>
-          <p className="font-bold text-inherit">GymBro</p>
+          <NavLink to="/">
+          <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <FontAwesomeIcon icon={faDumbbell} style={{ marginRight: "5px" }} />
+            <p className="font-bold text-inherit">GymBro</p>
+          </div>
+          </NavLink>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <UILink as={Link} color="foreground" href="#">
-            Features
-          </UILink>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <UILink as={Link} href="#" aria-current="page">
-            Customers
-          </UILink>
-        </NavbarItem>
-        <NavbarItem>
-          <UILink as={Link} color="foreground" href="#">
-            Integrations
-          </UILink>
+          <NavLink to="/features">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Features
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <UILink as={Link} color="foreground" to="weightTracker">
-            Weight Tracker
-          </UILink>
+          <NavLink to="/customers">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Customers
+              </UILink>
+            )}
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink to="/integrations">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Integrations
+              </UILink>
+            )}
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink to="/weightTracker">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Weight Tracker
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
@@ -99,4 +119,6 @@ export default function AppNavbar() {
       </NavbarMenu>
     </Navbar>
   );
-}
+};
+
+export default AppNavbar;

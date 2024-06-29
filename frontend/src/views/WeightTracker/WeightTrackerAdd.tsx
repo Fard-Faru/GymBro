@@ -2,16 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWeightScale, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { Input, DatePicker, RadioGroup, Radio, DateValue } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
-
-interface WeightData {
-    metric: string;
-    weight: string;
-    recordedOn: DateValue | null;
-  }
+import { WeightType } from "../../types/WeightType"
 
 export default function WeightTrackerHome() {
 
-    const [weightData, setWeightData] = useState<WeightData>({
+    const [weightData, setWeightData] = useState<WeightType>({
         metric: "lbs",
         weight: "",
         recordedOn: null
@@ -34,7 +29,6 @@ export default function WeightTrackerHome() {
         }));
       }
 
-    console.log(weightData)
 
 
     return (
