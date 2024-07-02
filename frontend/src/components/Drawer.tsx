@@ -1,24 +1,11 @@
-import { useState } from "react";
+interface DrawerProps {
+  isDrawerOpen: boolean;
+  toggleDrawer: () => void;
+}
 
-export default function Dashboard() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
-
+export default function Drawer({ isDrawerOpen, toggleDrawer }: DrawerProps) {
   return (
-    <div style={{ position: "relative", flex: "1" }}>
-      <div className="text-center mt-10">
-        <button
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          type="button"
-          onClick={toggleDrawer}
-        >
-          Show navigation
-        </button>
-      </div>
-
+    <>
       {isDrawerOpen && (
         <div
           id="drawer-navigation"
@@ -158,6 +145,6 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
