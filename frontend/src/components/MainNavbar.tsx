@@ -1,12 +1,8 @@
-import React from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
+  Button,
   DropdownItem,
   Input,
   DropdownTrigger,
@@ -16,40 +12,42 @@ import {
 } from "@nextui-org/react";
 import { SearchIcon } from "../assets/svg/SearchIcon";
 import { NotificationBellIcon } from "../assets/svg/NotificationBellIcon";
+import HamburgerIcon from "../assets/svg/HamburgerIcon";
 
-interface NavbarProps {
-  toggleDrawer: () => void;
-}
-
-export default function MainNavbar({ toggleDrawer }: NavbarProps) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = [
-    "Home",
-    "Features",
-    "About",
-    "Contact",
-    "Profile",
-    "Sign in",
-    "Login",
-  ];
-
+export default function MainNavbar() {
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isBlurred={false} position="static">
       <NavbarContent>
-        <button
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          type="button"
-          onClick={toggleDrawer}
-        >
-          Toggle
-        </button>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        <Dropdown>
+          <DropdownTrigger>
+            <Button
+              variant="flat"
+              isIconOnly
+              style={{ backgroundColor: "transparent" }}
+            >
+              <HamburgerIcon size={20} color="#000" />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            aria-label="Static Actions"
+            className="w-full"
+            variant="bordered"
+            style={{
+              height: "calc(100vh - 100px)",
+              backgroundColor: "transparent",
+            }}
+          >
+            <DropdownItem key="new" description="b;ah blah">
+              Dashboard
+            </DropdownItem>
+            <DropdownItem key="copy">Log Exercise</DropdownItem>
+            <DropdownItem key="edit">Edit file</DropdownItem>
+            <DropdownItem key="delete" className="text-danger" color="danger">
+              Delete file
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <NavbarBrand>
-          {/* <AcmeLogo /> APP LOGO IN FUTURE GOES HERE */}
           <p className="font-bold text-inherit">GymBro</p>
         </NavbarBrand>
       </NavbarContent>
@@ -98,16 +96,6 @@ export default function MainNavbar({ toggleDrawer }: NavbarProps) {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-
-      <NavbarMenu className="pt-10">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link color={"primary"} className="w-full" href="#" size="lg">
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
     </Navbar>
   );
 }

@@ -10,7 +10,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { Link as L1 } from "react-router-dom";
+import { NavLink as L1 } from "react-router-dom";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -28,7 +28,7 @@ export default function AppNavbar() {
     "relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity";
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="app-navbar">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -72,7 +72,9 @@ export default function AppNavbar() {
         <NavbarItem>
           <Button color="primary" variant="flat">
             <L1 to="signup" className={NextUICSS}>
-              Sign Up
+              {({ isActive }) => (
+                <p className={isActive ? "primary" : "foreground"}>Sign Up</p>
+              )}
             </L1>
           </Button>
         </NavbarItem>
