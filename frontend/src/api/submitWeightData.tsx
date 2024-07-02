@@ -1,11 +1,17 @@
-import { dateValueToDate } from "../utils/dateValueToDate";
+import { dateValueToDate } from "../utils/dateFormatters/dateValueToDate";
 import { WeightType } from "../types/WeightType"
 import axios from "axios";
 
 export default async function submitWeightData(weightData: WeightType) {
-    
+
+    let weight = Number(weightData.weight);
+    if (weightData.metric == "kg") {
+      weight *= 0.453592;
+    }
+    const formattedWeight = String(weight);
+
     const formattedWeightData = {
-        ...weightData,
+        weight: formattedWeight,
         recordedOn: dateValueToDate(weightData.recordedOn)
     };
     console.log(formattedWeightData);

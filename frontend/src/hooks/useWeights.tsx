@@ -3,5 +3,5 @@ import { WeightType } from "../types/WeightType";
 import { fetchWeights } from '../configs/fetchWeights';
 
 export default function useWeights() {
-  return useQuery<Array<WeightType>>('weights', fetchWeights);
+  return useQuery<WeightType[]>('weights', fetchWeights);
 }

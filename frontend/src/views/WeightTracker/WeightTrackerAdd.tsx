@@ -38,7 +38,7 @@ export default function WeightTrackerHome() {
 
     return (
       <div className="flex items-center justify-center flex-1" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
-        <p className="text-3xl font-bold underline">Weight Tracking Add</p>
+        <p className="text-3xl font-bold underline">Add New Weight</p>
         <Card
         isBlurred
         fullWidth
@@ -81,6 +81,7 @@ export default function WeightTrackerHome() {
                     type="number" 
                     label="Weight"
                     name="weight"
+                    placeholder='100'
                     startContent={
                         <FontAwesomeIcon icon={faWeightScale} style={{marginRight: "5px"}}/>
                     }

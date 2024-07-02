@@ -7,5 +7,7 @@ router.get('/data', appController.getData);
 
 router.get('/getWeight', appController.getUserWeight);
 
+router.post('/insertWeight', appController.postWeight);
+
 module.exports = router;
 
