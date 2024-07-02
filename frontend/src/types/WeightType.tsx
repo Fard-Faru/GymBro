@@ -3,5 +3,5 @@ import { DateValue } from "@nextui-org/react";
 export interface WeightType {
     metric: string;
     weight: string;
-    recordedOn: DateValue | null;
-  }
+    recordedOn: DateValue | string | null;
+}
