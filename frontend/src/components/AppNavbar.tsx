@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,12 +7,16 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
+  Link as UILink,
   Button,
 } from "@nextui-org/react";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
-export default function AppNavbar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+const AppNavbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     "Profile",
@@ -27,6 +31,7 @@ export default function AppNavbar() {
     "Log Out",
   ];
 
+
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
@@ -35,39 +40,59 @@ export default function AppNavbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">GymBro</p>
+          <NavLink to="/">
+          <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <FontAwesomeIcon icon={faDumbbell} style={{ marginRight: "5px" }} />
+            <p className="font-bold text-inherit">GymBro</p>
+          </div>
+          </NavLink>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/">
-            Home
-          </Link>
+          <NavLink to="/features">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Features
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link href="features" aria-current="page">
-            Features
-          </Link>
+          <NavLink to="/customers">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Customers
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="about">
-            About
-          </Link>
+          <NavLink to="/integrations">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Integrations
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="contact">
-            Contact
-          </Link>
+          <NavLink to="/weightTracker">
+            {({ isActive }) => (
+              <UILink color={isActive ? "primary" : "foreground"}>
+                Weight Tracker
+              </UILink>
+            )}
+          </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="login">Login</Link>
+          <UILink href="#">Login</UILink>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="signup" variant="flat">
+          <Button as={UILink} color="primary" href="#" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
@@ -75,7 +100,7 @@ export default function AppNavbar() {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
+            <UILink
               color={
                 index === 2
                   ? "primary"
@@ -88,10 +113,12 @@ export default function AppNavbar() {
               size="lg"
             >
               {item}
-            </Link>
+            </UILink>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
     </Navbar>
   );
-}
+};
+
+export default AppNavbar;
