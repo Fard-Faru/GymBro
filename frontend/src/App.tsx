@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
 import Signup from "./views/Signup";
+import Login from "./views/Login";
 import HostLayout from "./components/HostLayout";
-
+import LoggedInLayout from "./components/LoggedInLayout";
+import Dashboard from "./views/Dashboard";
 import "./App.css";
 
 function App() {
@@ -20,6 +22,10 @@ function App() {
         <Route path="/" element={<HostLayout />}>
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route path="/" element={<LoggedInLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

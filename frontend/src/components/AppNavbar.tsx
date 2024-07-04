@@ -10,83 +10,80 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
+import { NavLink as L1 } from "react-router-dom";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
+    "Home",
+    "Features",
+    "About",
+    "Contact",
     "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "Sign in",
+    "Login",
   ];
+  const NextUICSS =
+    "relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity";
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="app-navbar">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
+          {/* <AcmeLogo /> APP LOGO IN FUTURE GOES HERE */}
           <p className="font-bold text-inherit">GymBro</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/">
+          <L1 to="/" className={NextUICSS}>
             Home
-          </Link>
+          </L1>
         </NavbarItem>
         <NavbarItem>
-          <Link href="features" aria-current="page">
+          <L1 to="features" className={NextUICSS}>
             Features
-          </Link>
+          </L1>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="about">
+          <L1 to="about" className={NextUICSS}>
             About
-          </Link>
+          </L1>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="contact">
+          <L1 to="contact" className={NextUICSS}>
             Contact
-          </Link>
+          </L1>
         </NavbarItem>
       </NavbarContent>
+
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="login">Login</Link>
+          <L1 to="login" className={NextUICSS}>
+            Login
+          </L1>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="signup" variant="flat">
-            Sign Up
+          <Button color="primary" variant="flat">
+            <L1 to="signup" className={NextUICSS}>
+              {({ isActive }) => (
+                <p className={isActive ? "primary" : "foreground"}>Sign Up</p>
+              )}
+            </L1>
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+
+      <NavbarMenu className="pt-10">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
+            <Link color={"primary"} className="w-full" href="#" size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
