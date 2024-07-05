@@ -22,7 +22,6 @@ function App() {
         </Route>
         <Route path="/" element={<LoggedInLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="signup" element={<Signup />} />
           <Route path="weightTracker" element={<WeightLayout />}>
             <Route index element={<WeightTrackerView />} />
             <Route path="add" element={<WeightTrackerAdd />} />

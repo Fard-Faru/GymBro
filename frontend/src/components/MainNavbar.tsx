@@ -13,6 +13,8 @@ import {
 import { SearchIcon } from "../assets/svg/SearchIcon";
 import { NotificationBellIcon } from "../assets/svg/NotificationBellIcon";
 import HamburgerIcon from "../assets/svg/HamburgerIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 
 export default function MainNavbar() {
   return (
@@ -48,7 +50,16 @@ export default function MainNavbar() {
           </DropdownMenu>
         </Dropdown>
         <NavbarBrand>
-          <p className="font-bold text-inherit">GymBro</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <FontAwesomeIcon icon={faDumbbell} style={{ marginRight: "5px" }} />
+            <p className="font-bold text-inherit">GymBro</p>
+          </div>
         </NavbarBrand>
       </NavbarContent>
 
