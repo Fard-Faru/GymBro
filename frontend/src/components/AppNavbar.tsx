@@ -43,6 +43,7 @@ const AppNavbar: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                color: "black",
               }}
             >
               <FontAwesomeIcon
