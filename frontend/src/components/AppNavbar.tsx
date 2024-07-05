@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,13 +7,15 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
+  Link as UILink,
   Button,
 } from "@nextui-org/react";
 import { NavLink as L1 } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 
-export default function AppNavbar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const AppNavbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     "Home",
@@ -35,8 +37,21 @@ export default function AppNavbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> APP LOGO IN FUTURE GOES HERE */}
-          <p className="font-bold text-inherit">GymBro</p>
+          <L1 to="/">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faDumbbell}
+                style={{ marginRight: "5px" }}
+              />
+              <p className="font-bold text-inherit">GymBro</p>
+            </div>
+          </L1>
         </NavbarBrand>
       </NavbarContent>
 
@@ -61,6 +76,17 @@ export default function AppNavbar() {
             Contact
           </L1>
         </NavbarItem>
+
+        <NavbarItem>
+          <L1 to="integrations" className={NextUICSS}>
+            Integrations
+          </L1>
+        </NavbarItem>
+        <NavbarItem>
+          <L1 to="weightTracker" className={NextUICSS}>
+            Weight Tracker
+          </L1>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -72,9 +98,7 @@ export default function AppNavbar() {
         <NavbarItem>
           <Button color="primary" variant="flat">
             <L1 to="signup" className={NextUICSS}>
-              {({ isActive }) => (
-                <p className={isActive ? "primary" : "foreground"}>Sign Up</p>
-              )}
+              Sign Up
             </L1>
           </Button>
         </NavbarItem>
@@ -83,12 +107,25 @@ export default function AppNavbar() {
       <NavbarMenu className="pt-10">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link color={"primary"} className="w-full" href="#" size="lg">
+            <UILink
+              color={
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
+              }
+              className="w-full"
+              href="#"
+              size="lg"
+            >
               {item}
-            </Link>
+            </UILink>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
     </Navbar>
   );
-}
+};
+
+export default AppNavbar;

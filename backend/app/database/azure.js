@@ -1,10 +1,10 @@
 const connection = require("../config/azureConfig");
 
-const executeQuery = async (query) => {
-    const pool = await connection;
-    return pool.request().query(query);
-  };
+const executeQuery = async (queryCallback) => {
+  const pool = await connection;
+  return queryCallback(pool);
+};
 
 module.exports = {
-    query: executeQuery
+  query: executeQuery
 };

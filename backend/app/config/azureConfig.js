@@ -20,7 +20,7 @@ const connection = mssql.connect(dbConfig)
         return pool
     })
     .catch(err => {
-        console.error('DB Connection Failed! Erro: ', err);
+        console.error('DB Connection Failed! Error: ', err);
         throw err;
     })
 
