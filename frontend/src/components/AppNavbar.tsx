@@ -30,14 +30,14 @@ const AppNavbar: React.FC = () => {
     "relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity";
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="app-navbar">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="navbar">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand>
-          <L1 to="/">
+          <L1 to="/" className={NextUICSS}>
             <div
               style={{
                 display: "flex",

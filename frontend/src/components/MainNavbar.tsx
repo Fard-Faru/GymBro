@@ -18,7 +18,7 @@ import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 
 export default function MainNavbar() {
   return (
-    <Navbar isBlurred={false} position="static">
+    <Navbar isBlurred={false} position="static" className="navbar">
       <NavbarContent>
         <Dropdown>
           <DropdownTrigger>

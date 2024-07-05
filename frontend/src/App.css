@@ -41,7 +41,7 @@
   color: #888;
 }
 
-.app-navbar a.active {
+.navbar a.active {
   color: hsl(
     var(--nextui-primary) /
       var(--nextui-primary-opacity, var(--tw-text-opacity))
