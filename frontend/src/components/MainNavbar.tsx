@@ -2,7 +2,6 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  Button,
   DropdownItem,
   Input,
   DropdownTrigger,
@@ -12,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import { SearchIcon } from "../assets/svg/SearchIcon";
 import { NotificationBellIcon } from "../assets/svg/NotificationBellIcon";
-import HamburgerIcon from "../assets/svg/HamburgerIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,35 +18,6 @@ export default function MainNavbar() {
   return (
     <Navbar isBlurred={false} position="static" className="navbar">
       <NavbarContent>
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              variant="flat"
-              isIconOnly
-              style={{ backgroundColor: "transparent" }}
-            >
-              <HamburgerIcon size={20} color="#000" />
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Static Actions"
-            className="w-full"
-            variant="bordered"
-            style={{
-              height: "calc(100vh - 100px)",
-              backgroundColor: "transparent",
-            }}
-          >
-            <DropdownItem key="new" description="b;ah blah">
-              Dashboard
-            </DropdownItem>
-            <DropdownItem key="copy">Log Exercise</DropdownItem>
-            <DropdownItem key="edit">Edit file</DropdownItem>
-            <DropdownItem key="delete" className="text-danger" color="danger">
-              Delete file
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
         <NavbarBrand>
           <div
             style={{
