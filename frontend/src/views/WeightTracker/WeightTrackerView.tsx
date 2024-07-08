@@ -1,12 +1,32 @@
 import { useState } from "react";
-import 'chartjs-adapter-date-fns';
-import useWeights from '../../hooks/useWeights';
-import {dateValueToString } from '../../utils/dateFormatters/dateValueToString';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale, ChartOptions } from 'chart.js';
-import { Button, DateValue } from '@nextui-org/react';
+import "chartjs-adapter-date-fns";
+import useWeights from "../../hooks/useWeights";
+import { dateValueToString } from "../../utils/dateFormatters/dateValueToString";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale,
+  ChartOptions,
+} from "chart.js";
+import { Button, DateValue } from "@nextui-org/react";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale
+);
 
 export default function WeightTrackerHome() {
   const [metric, setMetric] = useState<string>("lbs");
@@ -15,22 +35,23 @@ export default function WeightTrackerHome() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
 
-
   // For Chart Consistency
-  const sortedWeights = userWeights?.slice().sort((a, b) => {
-    const dateA = new Date(a.recordedOn as string).getTime();
-    const dateB = new Date(b.recordedOn as string).getTime();
-    return dateA - dateB;
-  }) || [];
+  const sortedWeights =
+    userWeights?.slice().sort((a, b) => {
+      const dateA = new Date(a.recordedOn as string).getTime();
+      const dateB = new Date(b.recordedOn as string).getTime();
+      return dateA - dateB;
+    }) || [];
 
-  const formattedDates = sortedWeights.map(weight => dateValueToString(weight.recordedOn as DateValue));
-  const weights = sortedWeights.map(weight => {
-    if (metric === "kg"){
+  const formattedDates = sortedWeights.map((weight) =>
+    dateValueToString(weight.recordedOn as DateValue)
+  );
+  const weights = sortedWeights.map((weight) => {
+    if (metric === "kg") {
       return Number(weight.weight) * 0.453592;
     }
     return Number(weight.weight);
-});
-  
+  });
 
   const data = {
     labels: formattedDates,
@@ -39,23 +60,24 @@ export default function WeightTrackerHome() {
         label: `Weight Over Time (${metric})`,
         data: weights,
         fill: false,
-        backgroundColor: 'rgba(66, 135, 245, 0.2)',
-        borderColor: 'rgba(66, 135, 245, 1)',
+        backgroundColor: "rgba(66, 135, 245, 0.2)",
+        borderColor: "rgba(66, 135, 245, 1)",
       },
     ],
   };
 
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
+    responsive: true,
     scales: {
       x: {
-        type: 'time',
+        type: "time",
         time: {
-          unit: 'day',
-          tooltipFormat: 'P',
+          unit: "day",
+          tooltipFormat: "P",
         },
         title: {
           display: true,
-          text: 'Date',
+          text: "Date",
         },
       },
       y: {
@@ -68,17 +90,24 @@ export default function WeightTrackerHome() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center w-full">
       <p className="text-3xl font-bold underline">View Weight Over Time</p>
-      <Button 
-      color="primary" 
-      variant="ghost" 
-      onClick={() => metric === "lbs" ? setMetric("kg") :setMetric("lbs")}
-      style={{float: "right"}}>
+      <Button
+        color="primary"
+        variant="ghost"
+        onClick={() => (metric === "lbs" ? setMetric("kg") : setMetric("lbs"))}
+        style={{ marginLeft: "auto" }}
+      >
         {metric}
       </Button>
-      <Line data={data} options={options} />
+      <div
+        className="flex justify-center"
+        style={{
+          width: "calc(100% - 1rem)",
+        }}
+      >
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 }
-
