@@ -1,5 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { SignupType } from "../types/SingupType";
+import submitLoginData from "../api/submitLoginData";
 import {
   Button,
   Input,
@@ -10,17 +11,31 @@ import {
 } from "@nextui-org/react";
 
 export default function Login() {
-  const navigate = useNavigate();
 
-  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [loginData, setLoginData] = useState<SignupType>({
+    username: "",
+    password: ""
+  });
+
+  function handleChange(event : ChangeEvent<HTMLInputElement>) {
+    const {name, value} = event.target;
+    setLoginData(prevData => {
+      return {
+        ...prevData,
+        [name] : value
+      }
+    });
+  }
+
+  function handleSubmit(event: React.FormEvent){
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const username = formData.get("username");
-    const password = formData.get("password");
-    console.log("Username:", username);
-    console.log("Password:", password);
-    navigate("/dashboard");
-  };
+    submitLoginData(loginData);
+    console.log(loginData);
+  }
+
+  useEffect(() => {
+    console.log(loginData);
+  }, [loginData]);
 
   return (
     <div className="flex items-center justify-center flex-1">
@@ -33,7 +48,7 @@ export default function Login() {
       >
         <CardBody>
           <form
-            onSubmit={onFormSubmit}
+            onSubmit={handleSubmit}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -59,6 +74,8 @@ export default function Login() {
               label="Username"
               name="username"
               size="sm"
+              value={loginData.username}
+              onChange={handleChange}
             />
 
             <Spacer y={3} />
@@ -70,11 +87,14 @@ export default function Login() {
               type="password"
               name="password"
               size="sm"
+              value={loginData.password}
+              onChange={handleChange}
             />
-            <Spacer y={2} />
+
+            <Spacer y={4} />
             <div className="text-sm">Having trouble signing in?</div>
 
-            <Spacer y={6} />
+            <Spacer y={5} />
             <Button size="md" style={{ width: "60%" }} type="submit">
               Log in
             </Button>

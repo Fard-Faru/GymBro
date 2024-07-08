@@ -9,5 +9,9 @@ router.get('/getWeight', appController.getUserWeight);
 
 router.post('/insertWeight', appController.postWeight);
 
+router.post('/insertSignupData', appController.postSignup);
+
+router.post('/postLoginData', appController.postLogin);
+
 module.exports = router;
 

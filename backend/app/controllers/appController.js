@@ -1,5 +1,6 @@
-const db = require('../database/azure'); // Adjust the path as necessary
-const sql = require('mssql'); // Import the sql object for types
+const db = require('../database/azure'); 
+const sql = require('mssql'); // For sql object types
+const bcrypt = require('bcrypt'); // For encrypt passwords
 
 exports.getData = async (req, res) => {
   try {
@@ -56,4 +57,70 @@ exports.postWeight = async (req, res) => {
     console.error('Error inserting or updating data:', err);
     res.status(500).send('Error inserting or updating data');
   }
+};
+
+exports.postSignup =  async (req, res) => {
+  console.log(req.body);
+  const { username, password } = req.body;
+
+  try {
+    // Check if user exists
+    const userResult = await db.query(pool => 
+      pool.request()
+        .input('username', sql.NVarChar, username)
+        .query('SELECT * FROM GymBroDB.dbo.Users WHERE username = @username')
+    );
+
+    if (userResult.recordset.length > 0) {
+      return res.status(200).send('User already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Regsiter when user doesnt exist
+    const registerResult = await db.query(pool => 
+      pool.request()
+          .input('username', sql.NVarChar, username)
+          .input('password', sql.NVarChar, hashedPassword)
+          .query('INSERT INTO GymBroDB.dbo.Users (uid, username, password) VALUES (NEWID(), @username, @password)')
+    );
+    res.status(201).send({ message: 'User registered successfully', result: registerResult });
+  } catch (err) {
+    console.error('Error processing request:', err);
+    res.status(500).send('Error processing request');
+  }
+};
+
+exports.postLogin = async (req, res) => {
+  console.log(req.body);
+  const { username, password } = req.body;
+  
+  try {
+    // Check if user exists
+    const userResult = await db.query(pool => 
+      pool.request()
+        .input('username', sql.NVarChar, username)
+        .query('SELECT * FROM GymBroDB.dbo.Users WHERE username = @username')
+    );
+
+    if (userResult.recordset.length === 0) {
+      return res.status(404).send('User not found');
+    }
+
+    const user = userResult.recordset[0];
+
+    // Compare the provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).send('Invalid credentials');
+    }
+
+    res.status(200).send({ message: 'Login successful', uid: user.uid });
+
+  } catch (err) {
+    console.error('Error processing request:', err);
+    res.status(500).send('Error processing request');
+  }
+
 };

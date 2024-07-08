@@ -14,7 +14,7 @@ export default async function submitWeightData(weightData: WeightType) {
         weight: formattedWeight,
         recordedOn: dateValueToDate(weightData.recordedOn)
     };
-    console.log(formattedWeightData);
+    // console.log(formattedWeightData);
 
     try {
         await axios.post('http://localhost:5000/api/insertWeight', formattedWeightData);
